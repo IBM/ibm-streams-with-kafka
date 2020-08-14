@@ -6,7 +6,7 @@ Our application will be built using IBM Streams on IBM Cloud Pak for Data. IBM S
 
 > **NOTE**: The IBM Streams service is also available on IBM Cloud, and has the product name [IBM Streaming Analytics](https://cloud.ibm.com/catalog/services/streaming-analytics).
 
-For our Apache Kafka service, we will be using IBM Event Streams on IBM Cloud, which is a high-throughput message bus built on the Kafka platform. In the folliwing examples, we will show it as both a source and a target of clickstream data - data that was captured from user clicks as they browsed on-line shopping websites.
+For our Apache Kafka service, we will be using IBM Event Streams on IBM Cloud, which is a high-throughput message bus built on the Kafka platform. In the following examples, we will show it as both a source and a target of clickstream data - data that was captured from user clicks as they browsed on-line shopping websites.
 
 ## Flow
 
