@@ -1,16 +1,29 @@
-# WORK IN PROGRESS!!!!
+# Build a Kafka streaming application using IBM Streams
 
-# IBM Streams and Kafka
+In this code pattern, we walk you through the basics of creating a streaming application powered by Apache Kafka, one of the most popular open-source distributed event-streaming platforms used for creating real-time data pipeline and streaming applications.
 
-## What is IBM Streams?
+Our application will be built using IBM Streams on IBM Cloud Pak for Data. IBM Streams provides a built-in IDE that allows developers to visually create and configure operators in their application. The Cloud Pak for Data platform provides additional support, such as integration with multiple data sources, built-in analytics, Jupyter notebooks, and machine learning.
 
-## What is Kafka?
+> **NOTE**: The IBM Streams service is also available on IBM Cloud, and has the product name [IBM Streaming Analytics](https://cloud.ibm.com/catalog/services/streaming-analytics).
 
-IBM Event Streams for IBM Cloud is a high-throughput message bus built with Apache Kafka.
+For our Apache Kafka service, we will be using IBM Event Streams on IBM Cloud, which is a high-throughput message bus built on the Kafka platform. In the folliwing examples, we will show it as both a source and a target of clickstream data - data that was captured from user clicks as they browsed on-line shopping websites.
 
 ## Flow
 
+![architecure](doc/source/images/architecture.png)
+
+1. User creates streaming app in IBM Streams
+1. Streaming app uses Kafka service in IBM Event Streams to send/recieve messages
+1. Jupyter notebook is generated from IBM Streams app
+1. User executes streaming app in Jupyter notebook
+1. Jupyter notebook accesses Kafka service in IBM Event Stream to send/receive messages
+
 ## Incuded components
+
+* [IBM Streams on Cloud Pak for Data](https://www.ibm.com/cloud/streaming-analytics): Development platform for visually creating streaming applications.
+* [Apache Kafka](https://kafka.apache.org): Kafka is used for building real-time data pipelines and streaming apps. It is designed to be horizontally scalable, fault-tolerant and fast.
+* [Event Streams](https://cloud.ibm.com/catalog/services/event-streams): A scalable, high-throughput message bus. Wire micro-services together using open protocols.
+* [Jupyter Notebook](https://jupyter.org/): An open source web application that allows you to create and share documents that contain live code, equations, visualizations, and explanatory text.
 
 ## Featured technologies
 
@@ -21,7 +34,6 @@ IBM Event Streams for IBM Cloud is a high-throughput message bus built with Apac
 
 * An [IBM Cloud Account](https://cloud.ibm.com)
 * [IBM Cloud Pak for Data](https://www.ibm.com/in-en/products/cloud-pak-for-data)
-* [IBM Streams on Cloud Pak for Data](https://www.ibm.com/cloud/streaming-analytics)
 
 ## Steps
 
