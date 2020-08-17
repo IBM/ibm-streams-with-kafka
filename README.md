@@ -13,10 +13,10 @@ For our Apache Kafka service, we will be using IBM Event Streams on IBM Cloud, w
 ![architecure](doc/source/images/architecture.png)
 
 1. User creates streaming app in IBM Streams
-1. Streaming app uses Kafka service in IBM Event Streams to send/recieve messages
+1. Streaming app uses Kafka service via IBM Event Streams to send/recieve messages
 1. Jupyter notebook is generated from IBM Streams app
 1. User executes streaming app in Jupyter notebook
-1. Jupyter notebook accesses Kafka service in IBM Event Stream to send/receive messages
+1. Jupyter notebook accesses Kafka service via IBM Event Stream to send/receive messages
 
 ## Incuded components
 
