@@ -2,11 +2,13 @@
 
 In this code pattern, we walk you through the basics of creating a streaming application powered by Apache Kafka, one of the most popular open-source distributed event-streaming platforms used for creating real-time data pipeline and streaming applications.
 
-Our application will be built using IBM Streams on IBM Cloud Pak for Data. IBM Streams provides a built-in IDE that allows developers to visually create and configure operators in their application. The Cloud Pak for Data platform provides additional support, such as integration with multiple data sources, built-in analytics, Jupyter notebooks, and machine learning.
+Our application will be built using IBM Streams on IBM Cloud Pak for Data. IBM Streams provides a built-in IDE, called **Streams flows**, that allows developers to visually create their streaming application. The Cloud Pak for Data platform provides additional support, such as integration with multiple data sources, built-in analytics, Jupyter notebooks, and machine learning.
 
 > **NOTE**: The IBM Streams service is also available on IBM Cloud, and has the product name [IBM Streaming Analytics](https://cloud.ibm.com/catalog/services/streaming-analytics).
 
-For our Apache Kafka service, we will be using IBM Event Streams on IBM Cloud, which is a high-throughput message bus built on the Kafka platform. In the following examples, we will show it as both a source and a target of clickstream data - data that was captured from user clicks as they browsed on-line shopping websites.
+For our Apache Kafka service, we will be using `IBM Event Streams` on IBM Cloud, which is a high-throughput message bus built on the Kafka platform. In the following examples, we will show it as both a source and a target of clickstream data - data that was captured from user clicks as they browsed on-line shopping websites.
+
+> **IMPORTANT**: It's easy to get the two IBM streaming services confused due to their similar names. The distinction is that **IBM Event Streams** provides the data which can then be ingested and analyzed by **IBM Streams** applications. Additionally, these applications are developed using **Streams flows**, the built-in IDE in **IBM Streams**.
 
 ## Flow
 
@@ -38,14 +40,14 @@ For our Apache Kafka service, we will be using IBM Event Streams on IBM Cloud, w
 ## Steps
 
 1. [Clone the repo](#1-clone-the-repo)
-2. [Provison Event Streams on IBM Cloud](#2-provison-event-streams-on-ibm-cloud)
-3. [Create sample Kafka console python app](#3-create-sample-kafka-console-python-app)
-4. [Add IBM Streams service to Cloud Pak for Data](#4-add-ibm-streams-service-to-cloud-pak-for-data)
-5. [Create a new project in Cloud Pak for Data](#5-create-a-new-project-in-cloud-pak-for-data)
-6. [Create a Streams Flow in Cloud Pak for Data](#6-create-a-streams-flow-in-cloud-pak-for-data)
-7. [Use Streams Flows option to generate a notebook](#7-use-streams-flows-option-to-generate-a-notebook)
-8. [Run the generated Streams Flow notebook](#8-run-the-generated-streams-flow-notebook)
-9. [Create a Streams Flow with Kafka as source](#9-create-a-streams-flow-with-kafka-as-source)
+1. [Provison Event Streams on IBM Cloud](#2-provison-event-streams-on-ibm-cloud)
+1. [Create sample Kafka console python app](#3-create-sample-kafka-console-python-app)
+1. [Add IBM Streams service to Cloud Pak for Data](#4-add-ibm-streams-service-to-cloud-pak-for-data)
+1. [Create a new project in Cloud Pak for Data](#5-create-a-new-project-in-cloud-pak-for-data)
+1. [Create a Streams Flow in Cloud Pak for Data](#6-create-a-streams-flow-in-cloud-pak-for-data)
+1. [Create a Streams Flow with Kafka as source](#7-create-a-streams-flow-with-kafka-as-source)
+1. [Use Streams Flows option to generate a notebook](#8-use-streams-flows-option-to-generate-a-notebook)
+1. [Run the generated Streams Flow notebook](#9-run-the-generated-streams-flow-notebook)
 
 ### 1. Clone the repo
 
@@ -242,7 +244,13 @@ Click the `Save and run` icon to start your flow. This will result in a new pane
 
 ![run-streams-flow](doc/source/images/run-streams-flow.png)
 
+What is displayed is a live data stream. If you click on the stream between any two operator nodes, you can see the actual data - in a table view or in JSON format.
+
+![streams-flow-show-data](doc/source/images/streams-flow-show-data.png)
+
 Use the `Stop` icon to stop the flow, and the `Pencil` icon to return to the flow editor.
+
+>**NOTE**: This is a very basic IBM Stream flow. A more realistic streaming app would include additonal operators to filter and modify the stream between nodes.
 
 #### Use the Kafka sample app to view the messages
 
@@ -250,57 +258,9 @@ Run the Kafka sample app in `consumer` mode to view the messages from the sample
 
 ![consumer-output-clickdata](doc/source/images/consumer-output-clickdata.png)
 
-### 7. Use Streams Flows option to generate a notebook
+### 7. Create a Streams Flow with Kafka as source
 
-Once we have confirmed our `Streams Flow` is working correctly, we can use the flow to generate a Jupyter Notebook.
-
-From the flow editor, click the `Export to Notebook` icon.
-
-![export-to-notebook-button](doc/source/images/export-to-notebook-button.png)
-
-### 8. Run the generated Streams Flow notebook
-
-This action will result in a new notebook being added to your `Cloud Pak for Data` project (the name will be the same as the flow), and the notebook being displayed in edit/run mode.
-
-> If you are not familiar with notebooks, here is some background info:
->
-> When a notebook is run, each code cell in the notebook is executed, in order, from top to bottom.
->
-> Each code cell is selectable and is preceded by a tag in the left margin. The tag format is displayed as `[x]:`. Depending on the state of the notebook, the x can be:
->
-> * A blank, which indicates that the cell has never been run
-> * A number, which represents the relative order that this code step was run
-> * An *, which indicates that the cell is running
->
-> There are several ways to run the code cells in your notebook:
->
-> * One cell at a time. Select the cell, and then press Play in the toolbar.
-> * Batch mode, in sequential order. From the Cell menu, there are several options available. For example, you can Run All cells in your notebook, or you can Run All Below, which starts running from the first cell under the currently selected cell, and then continues running all of the cells that follow.
-> * At a scheduled time. Press the Schedule button that is located in the upper-right section of your notebook page. Here, you can schedule your notebook to be run once at some future time or repeatedly at your specified interval.
-
-For our notebook, run the cells one by one, and observe how each of the operators is gererated and tied into a `Streams flow'.
-
->**NOTE**: For convenience, the notebook is stored in this repo in the `/notebooks` directory. A version with output can be found in the `with-output` subdirectory. The name of the notebook is `kafka-streams-flow.ipynb`.
-
-If no errors occur, the flow is submitted to the `IBM Streams` instance. If successful, a `Job` number will printed.
-
-![notebook-job-id](doc/source/images/notebook-job-id.png)
-
-This job should show up in the list of jobs associated with our `IBM Streams` instance.
-
-![streams-job-list](doc/source/images/streams-job-list.png)
-
-Click the `View Graph` option in the action menu to see the actually messages streaming in real-time.
-
-![streams-flow-job-graph](doc/source/images/streams-flow-job-graph.png)
-
-As noted earlier, the notebook will be added to the asset list for our `Cloud Pak for Data` project. To re-run or edit the notebook, click the `pencil` icon.
-
-![project-notebook-list](doc/source/images/project-notebook-list.png)
-
-### 9. Create a Streams Flow with Kafka as source
-
-Now that we are familiar with the `Streams Flow` editor, let's create a new flow that has `Kafka` as the source.
+Now that we are familiar with the `Streams Flow` editor, let's create a new flow that uses `Kafka` as the source, instead of a target.
 
 We start by adding a new `Streams Flow` to our project.
 
@@ -342,15 +302,53 @@ Run the Kafka sample app in `producer` mode to send messages to our stream. The 
 
 ![run-streams-flow-kafka-source](doc/source/images/run-streams-flow-kafka-source.png)
 
-#### Export as a notebook and run
+### 8. Use Streams Flows option to generate a notebook
 
-As we did with our previous Streams Flow example, we can generate a notebook a notebook from our flow.
+Once we have confirmed our `Streams flows` apps are working correctly, we can use the `Export to Notebook` feature to generate a Jupyter Notebook. The notebook will contain the python code to complete the same task - create a connection to the IBM Streams instance, create a source and target operator, then submit the job to run the stream.
 
-If you run the flow and create an IBM Streams job, the graph page will show the messages being sent from our `producer` app.
+From the flow editor of one of the previous created `Streams flows`, click the `Export to Notebook` icon.
 
-![streams-flow-kafka-source-job-graph](doc/source/images/streams-flow-kafka-source-job-graph.png)
+![export-to-notebook-button](doc/source/images/export-to-notebook-button.png)
 
->**NOTE**: For convenience, the notebook is stored in this repo in the `/notebooks` directory. A version with output can be found in the `with-output` subdirectory. The name of the notebook is `kafka-streams-flow-as-source.ipynb`.
+### 9. Run the generated Streams Flow notebook
+
+This action will result in a new notebook being added to your `Cloud Pak for Data` project (the name will be the same as the flow), and the notebook being displayed in edit/run mode.
+
+> If you are not familiar with notebooks, here is some background info:
+>
+> When a notebook is run, each code cell in the notebook is executed, in order, from top to bottom.
+>
+> Each code cell is selectable and is preceded by a tag in the left margin. The tag format is displayed as `[x]:`. Depending on the state of the notebook, the x can be:
+>
+> * A blank, which indicates that the cell has never been run
+> * A number, which represents the relative order that this code step was run
+> * An *, which indicates that the cell is running
+>
+> There are several ways to run the code cells in your notebook:
+>
+> * One cell at a time. Select the cell, and then press Play in the toolbar.
+> * Batch mode, in sequential order. From the Cell menu, there are several options available. For example, you can Run All cells in your notebook, or you can Run All Below, which starts running from the first cell under the currently selected cell, and then continues running all of the cells that follow.
+> * At a scheduled time. Press the Schedule button that is located in the upper-right section of your notebook page. Here, you can schedule your notebook to be run once at some future time or repeatedly at your specified interval.
+
+For our notebook, run the cells one by one, and observe how each of the operators is gererated and tied into a `Streams flow'.
+
+>**NOTE**: For convenience, both streams notebooks are stored in this repo in the `/notebooks` directory. A version with output can be found for each in the `with-output` subdirectory.
+
+If no errors occur, the flow is submitted to the `IBM Streams` instance. If successful, a `Job` number will printed.
+
+![notebook-job-id](doc/source/images/notebook-job-id.png)
+
+This job should show up in the list of jobs associated with our `IBM Streams` instance.
+
+![streams-job-list](doc/source/images/streams-job-list.png)
+
+Click the `View Graph` option in the action menu to see the actually messages streaming in real-time.
+
+![streams-flow-job-graph](doc/source/images/streams-flow-job-graph.png)
+
+As noted earlier, the notebook will be added to the asset list for our `Cloud Pak for Data` project. To re-run or edit the notebook, click the `pencil` icon.
+
+![project-notebook-list](doc/source/images/project-notebook-list.png)
 
 # License
 
