@@ -210,7 +210,7 @@ To create a connection to the Event Streams service we created in an earlier ste
 
 ![kafka-connection-button](doc/source/images/kafka-connection-button.png)
 
-Select the `Adobe Kafka Streams` option.
+Select the `Apache Kafka Streams` option.
 
 ![create-kafka-connector](doc/source/images/create-kafka-connector.png)
 
@@ -218,7 +218,7 @@ From the pop-up dialog, provide a unique name for the connection. Then enter the
 
 ![kafka-connector-settings-1](doc/source/images/kafka-connector-settings-1.png)
 
-All of the other fields you can leave as is, except for the `Brokers` and `Password/API key` fields. Fir these values, use the credentials that were described in a prevous step.
+All of the other fields you can leave as is, except for the `Brokers` and `Password/API key` fields. For these values, use the credentials that were described in a prevous step.
 
 **NOTE**: The correct format must be used for both values. Use quotes around the full set of brokers, and use a comma to separate each broker. For password, do not use any quotes.
 
